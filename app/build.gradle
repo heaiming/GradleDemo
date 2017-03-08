@@ -42,7 +42,14 @@ android {
         //当方法数超过65535(方法的索引使用的是一个short值，
         //而short最大值是65535)的时候允许打包成多个dex文件，动态加载dex。这里面坑很深啊
     }
-
+    signingConfigs {
+        release {
+            keyAlias 'keystore'
+            keyPassword '123456789'
+            storeFile file('./keyStore/keystore.jks')
+            storePassword '123456789'
+        }
+    }
     buildTypes {
         release {//release版本的配置
             buildConfigField "boolean", "API_ENV", "false"
@@ -52,6 +59,7 @@ android {
             shrinkResources true  // 移除无用的resource文件
             minifyEnabled true    //是否进行混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
             //release的Proguard默认为Module下的proguard-rules.pro文件.
             debuggable false  //是否支持调试
             //ndk的一些配置
@@ -117,6 +125,8 @@ android {
         solo {
             applicationId "geniatech.com.solo"
         }
+
+
     }
     productFlavors.all {
         flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
