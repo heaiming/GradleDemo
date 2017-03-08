@@ -19,8 +19,8 @@ android {
         manifestPlaceholders = [hostName:"www.example.com"]
 
         applicationId "geniatech.com.gradledemo"
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         //目标sdk版本，如果设备等于这个版本那么android平台
         //就不进行兼容性检查，运行效率会高一点
         versionCode 15
@@ -145,4 +145,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
+    compile rootProject.ext.dependencies.design
 }
